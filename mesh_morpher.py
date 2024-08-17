@@ -69,7 +69,7 @@ def pack_offsets(ob, offsets):
     while len(me.uv_layers) < 4:
         me.uv_layers.new()
     for loop in me.loops:
-        x1, y1, z1 = offsets[0][loop.vertex_index]
+        x1, y1, z1 = offsets[0][loop.vertex_index]*100
         if len(offsets) > 1:
             offset = offsets[1][loop.vertex_index]
         else:
@@ -117,7 +117,7 @@ class OBJECT_OT_ProcessShapeKeys(bpy.types.Operator):
         units = context.scene.unit_settings
         ob = context.object
         shape_keys = ob.data.shape_keys
-        if units.system != 'METRIC' or round(units.scale_length, 2) != 0.01:
+        if units.system != 'METRIC' or round(units.scale_length, 2) != 1.00:
             self.report(
                 {'ERROR'},
                 "Scene Units must be Metric with a Unit Scale of 0.01!"
